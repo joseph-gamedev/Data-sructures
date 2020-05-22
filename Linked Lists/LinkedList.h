@@ -36,7 +36,6 @@ template<typename NodeType>
 inline void LinkedList<NodeType>::InsertAtFront(const NodeType& nodeInfo)
 {
 	Node<NodeType>* newPtr{ NewNode(nodeInfo) };
-
 	if (IsEmpty())
 	{
 		m_HeadNode = m_TailNode = newPtr;
