@@ -21,17 +21,19 @@ void Search(const std::string& key , Trie& trie)
 
 int main()
 {
-	Trie testTrie;
+	Trie* testTrie = new Trie();
 
 	for (auto& word : g_WordList)
 	{
-		testTrie.Insert(word);
+		testTrie->Insert(word);
 	}
 
-	Search("Computer", testTrie);
-	Search("Mango", testTrie);
-	Search("Apple", testTrie);
-	Search("Magic", testTrie);
+	Search("Computer", *testTrie);
+	Search("Mango", *testTrie);
+	Search("Apple", *testTrie);
+	Search("Magic", *testTrie);
+
+	delete testTrie;
 
 	std::cin.get();
 }

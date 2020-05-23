@@ -8,6 +8,12 @@ Trie::Trie()
 
 }
 
+Trie::~Trie()
+{
+	delete m_RootNode;
+	m_RootNode = nullptr;
+}
+
 void Trie::Insert(const std::string& key)
 {
 	Node* node = m_RootNode;

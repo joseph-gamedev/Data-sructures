@@ -8,6 +8,7 @@ class Node
 {
 	friend class Trie;
 public:
+	~Node();
 	Node* Insert(char letter);
 	Node* GetNode(char letter);
 	bool IsEndNode() const;
