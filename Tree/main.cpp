@@ -19,11 +19,20 @@ int main()
 	bool testStatus = testTree.Contains(35); 
 	if (testStatus)
 	{
-		std::cout << "search found";
+		std::cout << "search found" <<std::endl;
 	}
 	else
 	{
-		std::cout << "search not found";
+		std::cout << "search not found" << std::endl;;
+	}
+
+	if (testTree.IsBST(INT32_MIN, INT32_MAX))
+	{
+		std::cout << "This is a BST" << std::endl;
+	}
+	else
+	{
+		std::cout << "This is not a BST" << std::endl;
 	}
 
 	std::cin.get();

@@ -13,8 +13,12 @@ public:
 	void BeginPostOrderTraversal() const;
 	bool Contains(const NodeType& nodeInfo);
 
+	//returns true if this is a binary searh tree
+	bool IsBST(const NodeType& min, const NodeType& max);
+
 private:
 	void InsertNode(Node<NodeType>** nodePtr, const NodeType& nodeInfo);
+	bool IsBST(Node<NodeType>** nodePtr, const NodeType& min, const NodeType& max);
 	bool Contains(Node<NodeType>** nodePtr, const NodeType& nodeInfo);
 	void TraversePreOrder(Node<NodeType>* nodePtr) const;
 	void TraverseInOrder(Node<NodeType>* nodePtr) const;
@@ -62,6 +66,12 @@ inline bool Tree<NodeType>::Contains(const NodeType& nodeInfo)
 }
 
 template<typename NodeType>
+inline bool Tree<NodeType>::IsBST(const NodeType& min, const NodeType& max)
+{
+	return IsBST(&m_RootNode, min,max);
+}
+
+template<typename NodeType>
 inline void Tree<NodeType>::InsertNode(Node<NodeType>** nodePtr, const NodeType& nodeInfo)
 {
 	if (!*nodePtr)
@@ -82,6 +92,19 @@ inline void Tree<NodeType>::InsertNode(Node<NodeType>** nodePtr, const NodeType&
 			}
 		}
 	}
+}
+
+template<typename NodeType>
+inline bool Tree<NodeType>::IsBST(Node<NodeType>** nodePtr, const NodeType& min, const NodeType& max)
+{
+	if (*nodePtr == nullptr)
+		return true;
+
+	if ((*nodePtr)->GetData() < min || (*nodePtr)->GetData() > max)
+		return false;
+
+	return IsBST(&((*nodePtr)->m_LeftNodePtr), min, (*nodePtr)->GetData() - 1)
+		&& IsBST(&((*nodePtr)->m_RightNodePtr), (*nodePtr)->GetData() + 1, max);
 }
 
 template<typename NodeType>
