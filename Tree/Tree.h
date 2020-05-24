@@ -11,9 +11,11 @@ public:
 	void BeginPreOrderTraversal() const;
 	void BeginInOrderTraversal() const;
 	void BeginPostOrderTraversal() const;
+	bool Contains(const NodeType& nodeInfo);
 
 private:
 	void InsertNode(Node<NodeType>** nodePtr, const NodeType& nodeInfo);
+	bool Contains(Node<NodeType>** nodePtr, const NodeType& nodeInfo);
 	void TraversePreOrder(Node<NodeType>* nodePtr) const;
 	void TraverseInOrder(Node<NodeType>* nodePtr) const;
 	void TraversePostOrder(Node<NodeType>* nodePtr) const;
@@ -54,6 +56,12 @@ inline void Tree<NodeType>::BeginPostOrderTraversal() const
 }
 
 template<typename NodeType>
+inline bool Tree<NodeType>::Contains(const NodeType& nodeInfo)
+{
+	return Contains(&m_RootNode, nodeInfo);
+}
+
+template<typename NodeType>
 inline void Tree<NodeType>::InsertNode(Node<NodeType>** nodePtr, const NodeType& nodeInfo)
 {
 	if (!*nodePtr)
@@ -74,6 +82,30 @@ inline void Tree<NodeType>::InsertNode(Node<NodeType>** nodePtr, const NodeType&
 			}
 		}
 	}
+}
+
+template<typename NodeType>
+inline bool Tree<NodeType>::Contains(Node<NodeType>** nodePtr, const NodeType& nodeInfo)
+{
+	if (nodeInfo == (*nodePtr)->GetData())
+	{
+		return true;
+	}
+	else if (nodeInfo < (*nodePtr)->GetData())
+	{
+		if ((*nodePtr)->m_LeftNodePtr)
+		{
+			return Contains(&((*nodePtr)->m_LeftNodePtr), nodeInfo);
+		}
+	}
+	else
+	{
+		if ((*nodePtr)->m_RightNodePtr)
+		{
+			return Contains(&((*nodePtr)->m_RightNodePtr), nodeInfo);
+		}
+	}
+	return false;
 }
 
 template<typename NodeType>

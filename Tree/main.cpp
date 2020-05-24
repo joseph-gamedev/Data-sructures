@@ -16,5 +16,15 @@ int main()
 	testTree.BeginInOrderTraversal();
 	testTree.BeginPostOrderTraversal();
 	
+	bool testStatus = testTree.Contains(35); 
+	if (testStatus)
+	{
+		std::cout << "search found";
+	}
+	else
+	{
+		std::cout << "search not found";
+	}
+
 	std::cin.get();
 }
